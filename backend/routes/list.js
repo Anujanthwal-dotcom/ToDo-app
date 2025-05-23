@@ -77,7 +77,7 @@ router.get('/getTasks/:email', async (req, res) => {
             return res.status(400).json({ message: 'User do not exist' });
         }
         const list = dbUser.todo;
-        const lists = await List.find({ _id: { $in: list } });
+        const lists = await List.find({ _id: { $in: list } }).sort({ createdAt: -1 });
         res.status(200).json({ lists });
     } catch (error) {
         res.status(400).json({ message: 'Cannot get tasks' });
@@ -90,12 +90,12 @@ router.get('/getTask/:id', async (req, res) => {
         if(!list) {
             return res.status(400).json({ message: 'Task do not exist' });
         }
+        
         res.status(200).json({ list });
     } catch (error) {
         res.status(400).json({ message: 'Cannot get task' });
     }
 });
-
 
 
 
