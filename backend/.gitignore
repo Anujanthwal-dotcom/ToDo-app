@@ -5,9 +5,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment variables
-connection/.env
-.env.*
-
+.env
 # Logs
 logs/
 *.log
