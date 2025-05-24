@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.post("/addTask", async (req, res) => {
     try {
-        const { title, body, email } = req.body;
+        const { title, body} = req.body;
+        const email = req.user.email;
         const dbUser = await User.findOne({email});
 
         if(!dbUser) {
@@ -32,7 +33,8 @@ router.post("/addTask", async (req, res) => {
 
 router.put('/updateTask/:id', async (req, res) => {
     try {
-        const { title, body, email } = req.body;
+        const { title, body} = req.body;
+        const email = req.user.email;
         const dbUser = await User.findOne({email});
 
         if(!dbUser) {   
@@ -54,7 +56,7 @@ router.put('/updateTask/:id', async (req, res) => {
 
 router.delete('/deleteTask/:id', async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email } = req.user.email;
         const dbUser = await User.findOne({email});
 
         if(!dbUser) {   
@@ -70,9 +72,9 @@ router.delete('/deleteTask/:id', async (req, res) => {
     }
 });
 
-router.get('/getTasks/:email', async (req, res) => {    
+router.get('/getTasks/', async (req, res) => {    
     try {
-        const dbUser = await User.findOne({email: req.params.email});
+        const dbUser = await User.findOne({email: req.user.email});
         if(!dbUser) {
             return res.status(400).json({ message: 'User do not exist' });
         }
@@ -81,19 +83,6 @@ router.get('/getTasks/:email', async (req, res) => {
         res.status(200).json({ lists });
     } catch (error) {
         res.status(400).json({ message: 'Cannot get tasks' });
-    }
-});
-
-router.get('/getTask/:id', async (req, res) => {
-    try {
-        const list = await List.findById(req.params.id);
-        if(!list) {
-            return res.status(400).json({ message: 'Task do not exist' });
-        }
-        
-        res.status(200).json({ list });
-    } catch (error) {
-        res.status(400).json({ message: 'Cannot get task' });
     }
 });
 

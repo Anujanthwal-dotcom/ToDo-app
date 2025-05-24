@@ -1,6 +1,10 @@
 import express from 'express';
 import User from '../models/user.js'
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+
+
 let router = express.Router();
 
 //sign up
@@ -10,8 +14,8 @@ router.post('/register',async (req, res) => {
         const { name, email, password } = req.body;
 
         const dbUser = await User.findOne({ email: email });
-        
-        if(dbUser) {
+
+        if (dbUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
@@ -23,8 +27,9 @@ router.post('/register',async (req, res) => {
             password: hashedPassword,
         });
 
+        const token = jwt.sign({email: user.email}, process.env.JWT_SECRET, {expiresIn: '1h'});
         await user.save();
-        res.status(201).json({ user: user});
+        res.status(201).json({ token });
     } catch (error) {
         res.status(400).json({ message: 'cannot register' });
     }
@@ -46,8 +51,8 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         
-        const { password: userPassword, ...userData } = user._doc;
-        res.status(200).json({ user: userData });
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({ token });
     } catch (error) {
         res.status(400).json({ message: 'cannot login' });
     }
