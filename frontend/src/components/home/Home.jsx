@@ -1,7 +1,31 @@
 import React from 'react'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-
+import BASE from '../../urls/Base';
+import axios from 'axios';
 function Home() {
+    let navigate = useNavigate();
+    useEffect(() => {
+        const validateToken = async()=>{
+            const token = localStorage.getItem("token");
+
+            if(token){
+                const response = await axios.get(`${BASE}/user/validate`, {
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                });
+
+                if(response.data.valid===true){
+                    navigate("/dashboard");
+                }
+            }
+        }
+
+        validateToken();
+    }, [navigate]);
+
     return (
         <div className='w-[100%] h-[100vh] flex flex-col justify-center mt-10'>
             <div className='container flex flex-row space-x-50 items-center'>

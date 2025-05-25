@@ -8,11 +8,13 @@ import Signup from "./components/signup/Signup";
 import MainLayout from "./main-layout/MainLayout";
 import DashboardLayout from "./dashboard-layout/DashboardLayout";
 import Dashboard from "./components/dashboard/Dashboard";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div>
       <Router>
-  
+
         <Routes>
 
           <Route element={<MainLayout />}>
@@ -26,9 +28,12 @@ function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
-        
+
         </Routes>
       </Router>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1000} />
     </div>
 
   );
