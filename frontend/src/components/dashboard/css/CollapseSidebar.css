@@ -1,0 +1,38 @@
+.sidebar-container {
+  width: 20%;
+  min-width: 250px;
+  height: 100vh;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-container.collapsed {
+  width: 1px;
+  min-width: 1px;
+}
+
+.collapse-btn {
+  position: absolute;
+  top: 1rem;
+  right: -15px;
+  z-index: 10;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.collapse-btn:hover {
+  transform: scale(1.1);
+}

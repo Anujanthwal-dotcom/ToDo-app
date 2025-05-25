@@ -7,11 +7,14 @@ import Latest from './mainsection/Latest'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
 import BASE from '../../urls/Base';
+import './css/CollapseSidebar.css';
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 function Dashboard() {
   const active = useSelector((state) => state.BarState.value);
-
+  const [collapsed, setCollapsed] = useState(false);
   let navigate = useNavigate();
   
       useEffect(() => {
@@ -39,24 +42,25 @@ function Dashboard() {
       }, [navigate]);
 
   return (
-      <div className="w-[100%] h-[100vh] flex flex-row">
-        <div className='w-[20%] h-[100vh]'>
-          <Sidebar />
-        </div>
-        <div className="relative w-[80%] h-[100vh] bg-gray-200 flex flex-col">
-          <Topbar />
-
-          {
-            active==='today' && <Today />
-          }
-          {
-            active==='latest' && <Latest />
-          }
-          {
-            active==='priority' && <Priority />
-          }
-        </div>
+      <div className="w-full h-screen flex flex-row overflow-hidden">
+      
+      <div className={`sidebar-container ${collapsed ? 'collapsed' : ''}`}>
+        <Sidebar />
+        <button
+          className="collapse-btn"
+          onClick={() => setCollapsed(!collapsed)}
+        >
+          {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
+        </button>
       </div>
+
+      <div className="relative flex-1 h-full bg-gray-200 flex flex-col">
+        <Topbar />
+        {active === 'today' && <Today />}
+        {active === 'latest' && <Latest />}
+        {active === 'priority' && <Priority />}
+      </div>
+    </div>
   )
 }
 

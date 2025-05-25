@@ -1,0 +1,141 @@
+/* customCalendar.css - Modern Reddish Theme (not too dark) */
+
+.react-calendar {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    /* very light pinkish-white */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgb(128 0 0 / 0.1);
+    /* subtle soft red shadow */
+    padding: 1rem 1.25rem;
+    user-select: none;
+    color: #5c1a1a;
+    /* medium dark red text */
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #f7dad9;
+    /* very light pink border */
+    padding-bottom: 0.5rem;
+
+}
+
+.react-calendar__navigation button {
+    background: none;
+    border: none;
+    color: #a63a3a;
+    /* muted red */
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.25rem;
+}
+
+.react-calendar__navigation button:hover,
+.react-calendar__navigation button:focus {
+    background-color: #f9d6d5;
+    /* subtle pink hover */
+    outline: none;
+    color: #c53030;
+    /* brighter red */
+}
+
+.react-calendar__navigation__label {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #7a1a1a;
+    /* dark red */
+}
+
+.react-calendar__month-view__weekdays {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #c87c7c;
+    /* dusty rose */
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #feeceb;
+    margin-bottom: 0.10rem;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    padding: 0.2rem 0;
+}
+
+.react-calendar__tile {
+    border-radius: 10px;
+    padding: 0.50rem 0.50rem;
+    background: transparent;
+    color: #bb5353;
+    /* medium red */
+    font-weight: 500;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    margin-left: 0.28rem;
+    margin-right: 0.28rem;
+}
+
+.react-calendar__tile--now {
+    background: #fceaea;
+    /* soft pink bg for today */
+    font-weight: 700;
+    color: #bb6565;
+    /* dark red */
+    
+    /* red border ring */
+}
+
+.react-calendar__tile--active {
+    background: #ce4545;
+    /* red-600 */
+    color: white;
+    font-weight: 700;
+    
+}
+
+.react-calendar__tile:hover:not(.react-calendar__tile--active) {
+    background-color: #f9baba;
+    /* light red hover */
+    color: #7a1a1a;
+    /* dark red on hover */
+}
+
+.react-calendar__tile--hasActive {
+    background-color: #fdeaea;
+    /* very pale red */
+}
+
+.react-calendar__tile:focus {
+    outline: none;
+    /* lighter red focus ring */
+}
+
+/* Disable tiles from other months */
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: #f5c8c8;
+    /* pale pink */
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Smooth font smoothing */
+.react-calendar,
+.react-calendar * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

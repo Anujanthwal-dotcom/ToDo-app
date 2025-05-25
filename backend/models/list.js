@@ -26,6 +26,11 @@ const listSchema = mongoose.Schema(
             type: Date,
             default: Date.now,
         }
+        ,
+        dueDate:{
+            type: Date,
+            required: true,
+        }
     }
 )
 
