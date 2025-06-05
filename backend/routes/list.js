@@ -86,6 +86,65 @@ router.get('/getTasks/', async (req, res) => {
     }
 });
 
+router.get('/getTodayTasks', async (req, res)=>{
+    try {
+        const lists = await List.find({
+            user: req.user._id,
+            dueDate: new Date()
+        }).sort({ createdAt: -1 });
+        res.status(200).json({ lists });
+    } catch (error) {
+        res.status(400).json({ message: 'Cannot get tasks' });
+    }
+});
+
+router.get('/getLatestTasks', async (req, res)=>{
+    try {
+        const lists = await List.find({
+            user: req.user._id,
+        }).sort({ createdAt: -1 });
+        res.status(200).json({ lists });
+    } catch (error) {
+        res.status(400).json({ message: 'Cannot get tasks' });
+    }
+});
+
+router.get('/getHighPriorityTasks', async (req, res)=>{
+    try {
+        const lists = await List.find({
+            user: req.user._id,
+            priority: 'high'
+        }).sort({ createdAt: -1 });
+        res.status(200).json({ lists });
+    } catch (error) {
+        res.status(400).json({ message: 'Cannot get tasks' });
+    }
+});
+
+router.get('/getMediumPriorityTasks', async (req, res)=>{
+    try {
+        const lists = await List.find({
+            user: req.user._id,
+            priority: 'medium'
+        }).sort({ createdAt: -1 });
+        res.status(200).json({ lists });
+    } catch (error) {
+        res.status(400).json({ message: 'Cannot get tasks' });
+    }
+});
+
+router.get('/getLowPriorityTasks', async (req, res)=>{
+    try {
+        const lists = await List.find({
+            user: req.user._id,
+            priority: 'low'
+        }).sort({ createdAt: -1 });
+        res.status(200).json({ lists });
+    } catch (error) {
+        res.status(400).json({ message: 'Cannot get tasks' });
+    }
+});
+
 
 
 export default router;

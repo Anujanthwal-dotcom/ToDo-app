@@ -4,9 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react';
 import BASE from '../../urls/Base';
 import {toast} from 'react-toastify';
+import { useState } from 'react';
 function Login() {
 
-  let [user,setUser] = React.useState({
+  let [user,setUser] = useState({
     email: "",
     password: ""
   });

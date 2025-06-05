@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import BASE from '../../urls/Base';
 import axios from 'axios';
+import product from '../../product/product.png'
 function Home() {
     let navigate = useNavigate();
     useEffect(() => {
@@ -47,8 +48,8 @@ function Home() {
                 </div>
 
                 {/**product image. */}
-                <div>
-                    <img src="https://via.placeholder.com/800x400" alt="Product" className="mt-10 w-full h-auto rounded-lg shadow-lg" />
+                <div className='w-[80%]'>
+                    <img src={product} alt="Product" className="mt-10 w-full h-auto rounded-lg shadow-lg" />
                 </div>
             </div>
 

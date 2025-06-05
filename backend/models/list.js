@@ -31,6 +31,12 @@ const listSchema = mongoose.Schema(
             type: Date,
             required: true,
         }
+        ,
+        priority:{
+            type: String,
+            enum: ["low", "medium", "high"],
+            default: "high",
+        }
     }
 )
 

@@ -17,20 +17,21 @@
 
 .collapse-btn {
   position: absolute;
-  top: 1rem;
-  right: -15px;
-  z-index: 10;
+  top: 2rem;
+  right: -30px;
+  z-index: 100;
   background-color: #dc2626;
   color: white;
   border: none;
-  border-radius: 50%;
+  border-radius: 20%;
   width: 30px;
-  height: 30px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: transform 0.3s ease;
+  
 }
 
 .collapse-btn:hover {

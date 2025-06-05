@@ -2,13 +2,14 @@ import React from 'react'
 import { MdOutlineWatchLater } from "react-icons/md"
 import { BiSolidTimeFive } from "react-icons/bi"
 import { IoMdPricetags } from "react-icons/io"
+import { FaPlus } from "react-icons/fa";
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { setToday, setLatest, setPriority } from "../../../redux/BarState"
 import Calendar from 'react-calendar';
 import '../css/customCalendar.css';
 import { useState } from 'react';
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import {setBoxActive} from "../../../redux/AddTaskBoxState"
 
 function Sidebar() {
   const active = useSelector((state) => state.BarState.value);
@@ -16,15 +17,21 @@ function Sidebar() {
   const [value, setValue] = useState(new Date());
  
   return (
-    <div className={`h-full bg-gray-50 py-30 px-4 flex flex-col justify-between shadow-lg`}>
+    <div className={`h-full bg-gray-50 py-30 px-4 flex flex-col justify-between shadow-lg gap-4`}>
       
       <div className='flex flex-col gap-2'>
 
         {/* Navigation Buttons */}
+        <button onClick={() => dispatch(setBoxActive())} className={`border-1 border-gray-300 rounded flex items-center gap-2 py-3 px-4 text-left  hover:bg-gray-200 transition-colors`} >
+          <FaPlus className="text-orange-600 text-2xl" />
+          <span className={`text-xl font-bold text-red-600`} >Add Task</span>
+        </button>
+
         <button name='today' className={`rounded flex items-center gap-2 w-full py-2 px-3 text-left  hover:bg-rose-100 transition-colors ${active === "today" ? "bg-rose-100" : ""}`} onClick={() => dispatch(setToday())}>
           <BiSolidTimeFive className="text-orange-600 text-2xl" />
           <span className={' text-xl font-bold' + `${active === "today" ? " text-red-600" : ""}`}>Today</span>
         </button>
+
         <button name='latest' className={`rounded flex items-center gap-2 w-full py-2 px-3 text-left hover:bg-rose-100 transition-colors ${active === "latest" ? "bg-rose-100" : ""}`} onClick={() => dispatch(setLatest())}>
           <MdOutlineWatchLater className="text-orange-600 text-2xl" />
           <span className={'text-xl font-bold' + `${active === "latest" ? " text-red-600" : ""}`}>Latest</span>
