@@ -4,71 +4,87 @@ import { setBoxInactive } from "../../../redux/AddTaskBoxState";
 
 function AddTask() {
   const dispatch = useDispatch();
-  let [taskData,setTaskData]=useState({
-    title : "",
-    body : "",
-    dueDate : "",
-    priority : ""
+  const [taskData, setTaskData] = useState({
+    title: "",
+    body: "",
+    dueDate: "",
+    priority: ""
   });
 
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                    bg-white w-[100%] max-w-md p-6 rounded-lg shadow-lg z-50">
+                    bg-white w-[95%] max-w-xl p-8 rounded-2xl shadow-2xl z-50 border border-rose-200">
 
       <div className="flex justify-end">
         <button
           onClick={() => dispatch(setBoxInactive())}
-          className="text-rose-500 hover:text-rose-700 text-lg font-bold"
+          className="text-rose-500 hover:text-rose-700 text-2xl font-bold"
         >
           ✕
         </button>
       </div>
 
-      <h2 className="text-2xl text-rose-600 text-center mb-4">Add Task</h2>
+      <h2 className="text-4xl text-rose-600 font-semibold text-center mb-6">Add New Task</h2>
 
-      <form className="space-y-4">
+      <form className="space-y-6 text-lg">
         <div>
-          <label className="text-gray-700">Title</label>
-          <input type="text" className="w-full border border-rose-300 rounded p-2" />
+          <label className="block text-gray-800 mb-1 font-medium">Title</label>
+          <input
+            type="text"
+            className="w-full border-2 border-rose-300 focus:outline-none focus:border-rose-500 rounded-lg p-4 text-lg"
+            placeholder="Enter task title"
+          />
         </div>
 
         <div>
-          <label className="text-gray-700">Body</label>
-          <textarea className="w-full border border-rose-300 rounded p-2" rows="3" />
+          <label className="block text-gray-800 mb-1 font-medium">Body</label>
+          <textarea
+            className="w-full border-2 border-rose-300 focus:outline-none focus:border-rose-500 rounded-lg p-4 text-lg"
+            rows="4"
+            placeholder="Describe your task..."
+          />
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-6">
           <div className="flex-1">
-            <label className="text-gray-700">Due Date</label>
-            <input type="date" className="w-full border border-rose-300 rounded p-2" />
+            <label className="block text-gray-800 mb-1 font-medium">Due Date</label>
+            <input
+              type="date"
+              className="w-full border-2 border-rose-300 focus:outline-none focus:border-rose-500 rounded-xl p-4 text-lg h-[60px]"
+            />
           </div>
           <div className="flex-1">
-            <label className="text-gray-700">Priority</label>
-            <select className='w-full border border-rose-300 rounded p-2'>
-                <option value={''}>-</option>
-                <option value={'high'}>High</option>
-                <option value={'medium'}>Medium</option>
-                <option value={'low'}>Low</option>
+            <label className="block text-gray-800 mb-1 font-medium">Priority</label>
+            <select
+              className="w-full border-2 border-rose-300 focus:outline-none focus:border-rose-500 rounded-xl text-lg h-[60px] px-4"
+              defaultValue=""
+            >
+              <option value="">Select</option>
+              <option value="high">🔥 High</option>
+              <option value="medium">⭐ Medium</option>
+              <option value="low">📘 Low</option>
             </select>
           </div>
         </div>
 
-        <div className="flex justify-between pt-4">
+
+        <div className="flex justify-between items-center pt-6">
           <button
             type="submit"
-            className="bg-rose-600 hover:bg-rose-700 text-white py-2 px-4 rounded"
+            className="bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-8 rounded transition duration-200 shadow-md"
             onClick={() => dispatch(setBoxInactive())}
           >
-            Add
+            Add Task
           </button>
           <button
             type="button"
             onClick={() => dispatch(setBoxInactive())}
-            className="text-rose-600 hover:underline"
+            className="text-rose-600 hover:bg-rose-100 text-lg rounded px-8 py-3"
           >
             Cancel
           </button>
         </div>
+
       </form>
     </div>
   );

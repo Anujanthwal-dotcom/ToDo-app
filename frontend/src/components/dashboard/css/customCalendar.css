@@ -8,9 +8,14 @@
     border-radius: 12px;
     box-shadow: 0 2px 8px rgb(128 0 0 / 0.1);
     /* subtle soft red shadow */
-    padding: 1rem 1.25rem;
+    
     user-select: none;
     color: #5c1a1a;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     /* medium dark red text */
 }
 
@@ -59,6 +64,7 @@
 }
 
 .react-calendar__month-view__weekdays {
+    display: inline-block;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 0.75rem;
@@ -67,10 +73,17 @@
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #feeceb;
     margin-bottom: 0.10rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-left:0.75rem;
+    
 }
 
 .react-calendar__month-view__weekdays__weekday {
-    padding: 0.2rem 0;
+    display:block;
+    
 }
 
 .react-calendar__tile {
@@ -86,9 +99,8 @@
     justify-content: center;
     align-items: center;
     user-select: none;
-    margin-left: 0.28rem;
-    margin-right: 0.28rem;
-    margin-top: 0.28rem;
+    padding-left:0%;
+    padding-right: 0%;
 }
 
 .react-calendar__tile--now {
