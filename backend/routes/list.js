@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.post("/addTask", async (req, res) => {
     try {
-        const { title, body} = req.body;
+        const { title, body, priority, dueDate} = req.body;
         const email = req.user.email;
         const dbUser = await User.findOne({email});
-
+        
         if(!dbUser) {
             return res.status(400).json({ message: 'User do not exist' });
         }
@@ -17,8 +17,13 @@ router.post("/addTask", async (req, res) => {
         const list = new List({
             title,
             body,
+            priority,
+            dueDate,
+            createdAt: new Date(),
+            updatedAt: new Date(),
             user: dbUser._id,
         });
+        
 
         const savedList = await list.save();
         dbUser.todo.push(savedList);
@@ -33,20 +38,19 @@ router.post("/addTask", async (req, res) => {
 
 router.put('/updateTask/:id', async (req, res) => {
     try {
-        const { title, body} = req.body;
-        const email = req.user.email;
-        const dbUser = await User.findOne({email});
+        const { title, body, priority, dueDate} = req.body;
 
-        if(!dbUser) {   
-            return res.status(400).json({ message: 'User do not exist' });
-        }
-
-        const list = await List.findByIdAndUpdate(req.params.id, {
+        const updatedList = await List.findByIdAndUpdate(req.params.id, {
             title,
             body,
-        });
+            priority,
+            dueDate,
+            updatedAt: new Date()
+        }, { new: true });
 
-        await list.save();
+        if(!updatedList) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
         res.status(200).json({ message: 'Task updated successfully' });
 
     } catch (error) {
@@ -56,7 +60,7 @@ router.put('/updateTask/:id', async (req, res) => {
 
 router.delete('/deleteTask/:id', async (req, res) => {
     try {
-        const { email } = req.user.email;
+        const email = req.user.email;
         const dbUser = await User.findOne({email});
 
         if(!dbUser) {   
@@ -87,10 +91,18 @@ router.get('/getTasks/', async (req, res) => {
 });
 
 router.get('/getTodayTasks', async (req, res)=>{
+
     try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set to start of the day
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1); // Set to start of
         const lists = await List.find({
             user: req.user._id,
-            dueDate: new Date()
+            dueDate: {
+                $gte: today,
+                $lt: tomorrow
+            }
         }).sort({ createdAt: -1 });
         res.status(200).json({ lists });
     } catch (error) {
