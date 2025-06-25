@@ -1,5 +1,5 @@
 ![Screenshot from 2025-06-25 17-16-59](https://github.com/user-attachments/assets/bfa830e4-c0fc-4ae6-85a1-d4ea3a369488)
-# Todo - Task Management Application
+# WhatMatters - Task Management Application
 
 A modern task management application built with the MERN stack (MongoDB, Express.js, React, Node.js) that helps users organize their tasks and notes efficiently.
 
@@ -45,7 +45,7 @@ https://what-matters-frontend.vercel.app/
 1. Clone the repository
 ```bash
 git clone <repository-url>
-cd todo
+cd WhatMatters
 ```
 
 2. Install backend dependencies
